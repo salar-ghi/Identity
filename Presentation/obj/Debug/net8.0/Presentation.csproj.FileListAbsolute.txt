@@ -76,6 +76,7 @@ C:\Users\s.ghahremani\source\repos\Identity\Presentation\obj\Debug\net8.0\Presen
 C:\Users\s.ghahremani\source\repos\Identity\Presentation\obj\Debug\net8.0\Presentation.csproj.CoreCompileInputs.cache
 C:\Users\s.ghahremani\source\repos\Identity\Presentation\obj\Debug\net8.0\Presentation.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\s.ghahremani\source\repos\Identity\Presentation\obj\Debug\net8.0\Presentation.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\s.ghahremani\source\repos\Identity\Presentation\obj\Debug\net8.0\Presentation.sourcelink.json
 C:\Users\s.ghahremani\source\repos\Identity\Presentation\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\s.ghahremani\source\repos\Identity\Presentation\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\s.ghahremani\source\repos\Identity\Presentation\obj\Debug\net8.0\staticwebassets\msbuild.Presentation.Microsoft.AspNetCore.StaticWebAssets.props

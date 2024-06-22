@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "056gZYQLCCf8SF2Mr3JZwY8S1oD69+VkxvCQo/ek9lAjyssQ41eZ4vRbNwxC+6mC4+MxmOBu3BAgohsYKv0L6A==",
+  "dgSpecHash": "iRA1CAblaXb1GL5iWqhhZO37efO3tWDHqbWAuMpRve1hJhW946uVrrbBzwqG1I84jK8kQAjdSmWnAxpWgcw9Fg==",
   "success": true,
   "projectFilePath": "C:\\Users\\s.ghahremani\\source\\repos\\Identity\\IdentityServerWebApi\\IdentityServerWebApi.csproj",
   "expectedPackageFiles": [
@@ -14,7 +14,7 @@
     "C:\\Users\\s.ghahremani\\.nuget\\packages\\identitymodel\\6.2.0\\identitymodel.6.2.0.nupkg.sha512",
     "C:\\Users\\s.ghahremani\\.nuget\\packages\\identitymodel.aspnetcore.oauth2introspection\\4.0.1\\identitymodel.aspnetcore.oauth2introspection.4.0.1.nupkg.sha512",
     "C:\\Users\\s.ghahremani\\.nuget\\packages\\identityserver4.accesstokenvalidation\\3.0.1\\identityserver4.accesstokenvalidation.3.0.1.nupkg.sha512",
-    "C:\\Users\\s.ghahremani\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.0.0\\microsoft.aspnetcore.authentication.jwtbearer.3.0.0.nupkg.sha512",
+    "C:\\Users\\s.ghahremani\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.6\\microsoft.aspnetcore.authentication.jwtbearer.8.0.6.nupkg.sha512",
     "C:\\Users\\s.ghahremani\\.nuget\\packages\\microsoft.aspnetcore.authentication.openidconnect\\8.0.3\\microsoft.aspnetcore.authentication.openidconnect.8.0.3.nupkg.sha512",
     "C:\\Users\\s.ghahremani\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\8.0.6\\microsoft.aspnetcore.cryptography.internal.8.0.6.nupkg.sha512",
     "C:\\Users\\s.ghahremani\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\8.0.6\\microsoft.aspnetcore.cryptography.keyderivation.8.0.6.nupkg.sha512",

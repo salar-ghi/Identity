@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "dgSpecHash": "Zag4qR2UZ2+mNsBnFQSS6hYWJT/gAHu4uC7CRwp8E/r78WxDBInh8Ld7SKIPalO7jnmWYggm6GbjIF18AMndIg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\s.ghahremani\\source\\repos\\Identity\\InteractiveIdentityClient\\InteractiveIdentityClient.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\s.ghahremani\\.nuget\\packages\\microsoft.aspnetcore.authentication.openidconnect\\8.0.6\\microsoft.aspnetcore.authentication.openidconnect.8.0.6.nupkg.sha512",
+    "C:\\Users\\s.ghahremani\\.nuget\\packages\\microsoft.identitymodel.abstractions\\7.1.2\\microsoft.identitymodel.abstractions.7.1.2.nupkg.sha512",
+    "C:\\Users\\s.ghahremani\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\7.1.2\\microsoft.identitymodel.jsonwebtokens.7.1.2.nupkg.sha512",
+    "C:\\Users\\s.ghahremani\\.nuget\\packages\\microsoft.identitymodel.logging\\7.1.2\\microsoft.identitymodel.logging.7.1.2.nupkg.sha512",
+    "C:\\Users\\s.ghahremani\\.nuget\\packages\\microsoft.identitymodel.protocols\\7.1.2\\microsoft.identitymodel.protocols.7.1.2.nupkg.sha512",
+    "C:\\Users\\s.ghahremani\\.nuget\\packages\\microsoft.identitymodel.protocols.openidconnect\\7.1.2\\microsoft.identitymodel.protocols.openidconnect.7.1.2.nupkg.sha512",
+    "C:\\Users\\s.ghahremani\\.nuget\\packages\\microsoft.identitymodel.tokens\\7.1.2\\microsoft.identitymodel.tokens.7.1.2.nupkg.sha512",
+    "C:\\Users\\s.ghahremani\\.nuget\\packages\\system.identitymodel.tokens.jwt\\7.1.2\\system.identitymodel.tokens.jwt.7.1.2.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1803",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "You are running the 'restore' operation with an 'HTTP' source, 'http://nexus.nitro.local/repository/nuget-hosted/'. Non-HTTPS access will be removed in a future version. Consider migrating to an 'HTTPS' source."
+    }
+  ]
+}

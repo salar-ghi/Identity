@@ -20,12 +20,12 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddControllers(options =>
-        {
-        });
+        services.AddControllers(options => {});
+
+        var connectionString = Configuration.GetConnectionString("IdentityServerCon");
 
         services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("MyConnectionString")));
+            options.UseSqlServer(connectionString));
 
         services.AddIdentity<ApplicationUser, ApplicationRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -36,28 +36,28 @@ public class Startup
             .AddInMemoryApiScopes(Config.ApiScopes)
             .AddInMemoryClients(Config.Clients)
             .AddInMemoryIdentityResources(Config.IdentityResources)
-            .AddConfigurationStore(options =>
-            {
-                options.ConfigureDbContext = builder =>
-                    builder.UseSqlServer(Configuration.GetConnectionString("IdentityServerConnection"));
-            })
-            .AddOperationalStore(options =>
-            {
-                options.ConfigureDbContext = builder =>
-                    builder.UseSqlServer(Configuration.GetConnectionString("IdentityServerConnection"));
-            })
             .AddDeveloperSigningCredential();
 
-        //.ADdCustomIdentityResources()
+            //.AddConfigurationStore(options =>
+            //{
+            //    options.ConfigureDbContext = builder =>
+            //        builder.UseSqlServer(connectionString);
+            //})
+            //.AddOperationalStore(options =>
+            //{
+            //    options.ConfigureDbContext = builder =>
+            //        builder.UseSqlServer(connectionString);
+            //})
+            //.AddDeveloperSigningCredential();
 
 
         services.AddAuthentication()
-            .AddIdentityServerAuthentication(options =>
-            {
-                options.Authority = IdentityServerConfig.Authority;
-                options.RequireHttpsMetadata = false;
-            })
-            .AddJwtBearer(options =>
+            //.AddIdentityServerAuthentication(options =>
+            //{
+            //    options.Authority = IdentityServerConfig.Authority;
+            //    options.RequireHttpsMetadata = false;
+            //})
+            .AddJwtBearer("Bearer", options =>
             {
                 options.Authority = IdentityServerConfig.Authority;
                 options.RequireHttpsMetadata = false;
@@ -74,19 +74,21 @@ public class Startup
                     };
             });
 
-        services.AddAuthorization(options =>
-        {
-            options.AddPolicy("RequireRole", policy =>
-            {
-                policy.RequireClaim(ClaimTypes.Role);
-            });
-        });
+        //services.AddAuthorization(options =>
+        //{
+        //    options.AddPolicy("RequireRole", policy =>
+        //    {
+        //        policy.RequireClaim(ClaimTypes.Role);
+        //    });
+        //});
 
-        services.AddSingleton<ITenantResolver, TenantResolver>();
-        
+        //services.AddSingleton<ITenantResolver, TenantResolver>();
+
         //services.AddMultiTenancy()
         //    .WithTenantResolver<TenantResolver>()
         //    .WithStore<ConfigurationTenantStore>();
+        services.AddEndpointsApiExplorer();
+        services.AddSwaggerGen();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -95,10 +97,12 @@ public class Startup
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI();
         }
         app.UseRouting();
         app.UseIdentityServer();
-        app.UseAuthentication();
+        //app.UseAuthentication();
         app.UseAuthorization();
         app.UseEndpoints(endpoints =>
         {
