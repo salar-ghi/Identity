@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "98OYIJ9gWV/rztEUpB4XLMZ3vOit0D3lCHvMtjv529Ce9gkyQSkYU0o9WRkx7isrEoMgxdPoUfBTSaeoJHXrmw==",
+  "dgSpecHash": "bHyV+GrYlbrZGyqiDBJY0I/QdYFU012FNGem6Y+VXi5I+wahq00r9HFxukrlr26OgL/ci1YMAO1rZfeb3ynWGg==",
   "success": true,
   "projectFilePath": "C:\\Users\\s.ghahremani\\source\\repos\\Identity\\Presentation\\Presentation.csproj",
   "expectedPackageFiles": [
@@ -89,12 +89,6 @@
     "C:\\Users\\s.ghahremani\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
   ],
   "logs": [
-    {
-      "code": "NU1803",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "You are running the 'restore' operation with an 'HTTP' source, 'http://nexus.nitro.local/repository/nuget-hosted/'. Non-HTTPS access will be removed in a future version. Consider migrating to an 'HTTPS' source."
-    },
     {
       "code": "NU1701",
       "level": "Warning",
