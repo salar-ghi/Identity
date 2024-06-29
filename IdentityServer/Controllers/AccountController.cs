@@ -1,33 +1,47 @@
-﻿using Duende.IdentityServer.Services;
+﻿using Duende.IdentityServer;
+using Duende.IdentityServer.Models;
+using Duende.IdentityServer.Services;
+using Duende.IdentityServer.Stores;
+using Duende.IdentityServer.Validation;
+using IdentityModel;
 using IdentityServer.Domain;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.IdentityModel.Tokens;
 using System.ComponentModel.DataAnnotations;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace IdentityServer.Controllers;
 
-[Route("api/[controller]")]
 [ApiController]
+[Route("[controller]")]
 public class AccountController : ControllerBase
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly IIdentityServerInteractionService _interaction;
-    private readonly ILogger<AccountController> _logger;
+    private readonly IClientStore _clientStore;
+    private readonly ITokenService _tokenService;
+    private readonly IConfiguration _config; 
+    //private readonly ILogger<AccountController> _logger;
 
 
     public AccountController(
         UserManager<ApplicationUser> userManager,
         SignInManager<ApplicationUser> signInManager,
         IIdentityServerInteractionService interaction,
-        ILogger<AccountController> logger)
+        IClientStore clientStore,
+        ITokenService tokenService,
+        IConfiguration config)
     {
         _userManager = userManager;
         _signInManager = signInManager;
         _interaction = interaction;
-        _logger = logger;
+        _clientStore = clientStore;
+        _tokenService = tokenService;
+        _config = config;
     }
 
 
@@ -37,40 +51,141 @@ public class AccountController : ControllerBase
         return Ok();
     }
 
-    [HttpPost]
+    //[HttpPost(Name="Register")]
+    [HttpPost("api/Account/Register")]
     public async Task<IActionResult> Register(RegisterDto model)
     {
-        if (ModelState.IsValid)
+        var user = new ApplicationUser
         {
-            var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-            var result = await _userManager.CreateAsync(user);
-            if (result.Succeeded)
-            {
-                await _signInManager.SignInAsync(user, isPersistent: false);
-                RedirectToAction("Index", "Home");
-            }
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError(string.Empty, error.Description);
-            }
+            FirstName = model.FirstName,
+            LastName = model.LastName,
+            UserName = model.Email,
+            Email = model.Email,
+            EmailConfirmed = true
+        };
+        var result = await _userManager.CreateAsync(user, model.Password);
+        if (result.Succeeded)
+        {
+            //await _signInManager.SignInAsync(user, isPersistent: false);
+            //RedirectToAction("Index", "Home");
+            return Ok(new { message = "User registered successfully" });
         }
-        return Ok(model);
+        return BadRequest(result.Errors);
     }
 
-    [HttpPost]
+    //[HttpPost(Name="Login")]
+    [HttpPost("api/Account/Login")]
     public async Task<IActionResult> Login(LoginDto model, string rturnUrl = null)
     {
-        //ViewData["ReturnUrl"] = rturnUrl;
-        if (ModelState.IsValid)
+        var user = await _userManager.FindByEmailAsync(model.Email);
+        if (user != null)
         {
-            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+            var checkPassWord = await _userManager.CheckPasswordAsync(user, model.Password);
+            if (!checkPassWord)
+            {
+                return BadRequest(new { message = "Invalid password" });
+            }
+            // Check if email is confirmed (if required)
+            if (_userManager.Options.SignIn.RequireConfirmedEmail && !await _userManager.IsEmailConfirmedAsync(user))
+            {
+                return BadRequest(new { message = "Email not confirmed" });
+            }
+            if (await _userManager.IsLockedOutAsync(user))
+            {
+                return BadRequest(new { message = "Account is locked out" });
+            }
+
+            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, lockoutOnFailure: true);
             if (result.Succeeded)
             {
-                return RedirectToLocal(rturnUrl);
+                //var user = await _userManager.FindByEmailAsync(model.Email);
+                //if (user == null)
+                //{
+                //    return BadRequest(new { message = "User not found" });
+                //}
+
+                //// Here you would typically geneate and return a token
+
+                // Create claims for the user
+                var claims = new List<Claim>
+                {
+                    new Claim("sub", user.Id),
+                    new Claim(ClaimTypes.NameIdentifier, user.Id),
+                    new Claim(ClaimTypes.Email, user.Email)
+                };
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                var jwtToken = new JwtSecurityToken(
+                    issuer: _config["Jwt:Issuer"],
+                    audience: _config["Jwt:Audience"],
+                    claims: claims,
+                    expires: DateTime.Now.AddMinutes(30),
+                    signingCredentials: creds
+                    );
+
+                //return Ok(new
+                //{
+                //    token = new JwtSecurityTokenHandler().WriteToken(jwtToken),
+                //    expiration = jwtToken.ValidTo
+                //});
+
+                // Create a ClaimsIdentity
+                var identity = new ClaimsIdentity(claims, "local");
+
+                // Create a ClaimsPrincipal from the ClaimsIdentity
+                var principal = new ClaimsPrincipal(identity);
+
+                // Create a token request
+                var tokenRequest = new TokenCreationRequest
+                {
+                    Subject = principal,
+                    ValidatedResources = new ResourceValidationResult(),
+                    ValidatedRequest = new ValidatedRequest()
+                };
+
+                // Generate the Token
+                var token = await _tokenService.CreateAccessTokenAsync(tokenRequest);                
+
+                // Create a security token
+                //var tokenResult = await _tokenService.CreateSecurityTokenAsync(tokenRequest);
+                var securityToken = new Token(IdentityServerConstants.TokenTypes.AccessToken)
+                {
+                    CreationTime = token.CreationTime,
+                    Issuer = token.Issuer,
+                    Lifetime = token.Lifetime,
+                    Claims = token.Claims,
+                    ClientId = token.ClientId,
+                    AccessTokenType = token.AccessTokenType,
+                    Description = token.Description,
+                    Version = token.Version,
+                };
+
+                var tokenValue = await _tokenService.CreateSecurityTokenAsync(securityToken);
+
+                return Ok(new
+                {
+                    access_token = tokenValue,
+                    //access_token = tokenRequest.AccessTokenToHash,
+                    toke_type = "Bearer",
+                    //toke_type = tokenResult.TokenType,
+                    expires_in = token.Lifetime
+                    //expires_in = token.ExpiresIn
+                });
             }
-            ModelState.AddModelError(string.Empty, "Invalid login attemp");
+            if (result.IsLockedOut)
+            {
+                return BadRequest(new { message = "Account locked out" });
+            }
+            if (result.IsNotAllowed)
+            {
+                return BadRequest(new { message = "Login not allowed" });
+            }
+            if (result.RequiresTwoFactor)
+            {
+                return BadRequest(new { message = "Requires two-factor authentication" });
+            }
         }
-        return Ok(model);
+        return Unauthorized(new { message = "Invalid login attemp" });
     }
 
     private IActionResult RedirectToLocal(string returnUrl)
@@ -89,6 +204,13 @@ public class AccountController : ControllerBase
 
 public class RegisterDto
 {
+
+    [Required]
+    public string FirstName { get; set; }
+
+    [Required]
+    public string LastName { get; set; }
+
     [Required]
     [EmailAddress]
     public string Email { get; set; }
