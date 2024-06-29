@@ -1,17 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "vajOttxLbtQGvIP0qbMDzVpP8kFJbh8OYmN9GHQKTsQLY6eOwXS/FPAT7zi9N9HjZtPGuI+UmfXe1GZn6P1CXw==",
+  "dgSpecHash": "poS+BTe6cnM=",
   "success": true,
-  "projectFilePath": "C:\\Users\\s.ghahremani\\source\\repos\\Identity\\InteractiveIdentityClient\\InteractiveIdentityClient.csproj",
+  "projectFilePath": "G:\\train\\.Net\\project\\Identity\\InteractiveIdentityClient\\InteractiveIdentityClient.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\s.ghahremani\\.nuget\\packages\\microsoft.aspnetcore.authentication.openidconnect\\8.0.6\\microsoft.aspnetcore.authentication.openidconnect.8.0.6.nupkg.sha512",
-    "C:\\Users\\s.ghahremani\\.nuget\\packages\\microsoft.identitymodel.abstractions\\7.1.2\\microsoft.identitymodel.abstractions.7.1.2.nupkg.sha512",
-    "C:\\Users\\s.ghahremani\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\7.1.2\\microsoft.identitymodel.jsonwebtokens.7.1.2.nupkg.sha512",
-    "C:\\Users\\s.ghahremani\\.nuget\\packages\\microsoft.identitymodel.logging\\7.1.2\\microsoft.identitymodel.logging.7.1.2.nupkg.sha512",
-    "C:\\Users\\s.ghahremani\\.nuget\\packages\\microsoft.identitymodel.protocols\\7.1.2\\microsoft.identitymodel.protocols.7.1.2.nupkg.sha512",
-    "C:\\Users\\s.ghahremani\\.nuget\\packages\\microsoft.identitymodel.protocols.openidconnect\\7.1.2\\microsoft.identitymodel.protocols.openidconnect.7.1.2.nupkg.sha512",
-    "C:\\Users\\s.ghahremani\\.nuget\\packages\\microsoft.identitymodel.tokens\\7.1.2\\microsoft.identitymodel.tokens.7.1.2.nupkg.sha512",
-    "C:\\Users\\s.ghahremani\\.nuget\\packages\\system.identitymodel.tokens.jwt\\7.1.2\\system.identitymodel.tokens.jwt.7.1.2.nupkg.sha512"
+    "C:\\Users\\sAlAr\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.6\\microsoft.aspnetcore.authentication.jwtbearer.8.0.6.nupkg.sha512",
+    "C:\\Users\\sAlAr\\.nuget\\packages\\microsoft.aspnetcore.authentication.openidconnect\\8.0.6\\microsoft.aspnetcore.authentication.openidconnect.8.0.6.nupkg.sha512",
+    "C:\\Users\\sAlAr\\.nuget\\packages\\microsoft.identitymodel.abstractions\\7.1.2\\microsoft.identitymodel.abstractions.7.1.2.nupkg.sha512",
+    "C:\\Users\\sAlAr\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\7.1.2\\microsoft.identitymodel.jsonwebtokens.7.1.2.nupkg.sha512",
+    "C:\\Users\\sAlAr\\.nuget\\packages\\microsoft.identitymodel.logging\\7.1.2\\microsoft.identitymodel.logging.7.1.2.nupkg.sha512",
+    "C:\\Users\\sAlAr\\.nuget\\packages\\microsoft.identitymodel.protocols\\7.1.2\\microsoft.identitymodel.protocols.7.1.2.nupkg.sha512",
+    "C:\\Users\\sAlAr\\.nuget\\packages\\microsoft.identitymodel.protocols.openidconnect\\7.1.2\\microsoft.identitymodel.protocols.openidconnect.7.1.2.nupkg.sha512",
+    "C:\\Users\\sAlAr\\.nuget\\packages\\microsoft.identitymodel.tokens\\7.1.2\\microsoft.identitymodel.tokens.7.1.2.nupkg.sha512",
+    "C:\\Users\\sAlAr\\.nuget\\packages\\system.identitymodel.tokens.jwt\\7.1.2\\system.identitymodel.tokens.jwt.7.1.2.nupkg.sha512"
   ],
   "logs": []
 }

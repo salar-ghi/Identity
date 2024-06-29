@@ -1,3 +1,4 @@
+using Duende.IdentityServer.Test;
 using IdentityServer.Domain;
 using IdentityServer.Infrastructure;
 using IdentityServer.Infrastructure.DbContext;
@@ -18,7 +19,20 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
-builder.Services.AddIdentityServer()
+builder.Services.AddIdentityServer(option =>
+{
+    option.Events.RaiseErrorEvents = true;
+    option.Events.RaiseInformationEvents = true;
+    option.Events.RaiseFailureEvents = true;
+    option.Events.RaiseSuccessEvents = true;
+    
+    option.EmitStaticAudienceClaim = true;
+    //option.AccessTokenJwtType = "at+jwt";
+    //option.IssuerUri = "";
+    //option.LogoutTokenJwtType = "logout+jwt";
+    //option.Discovery.CustomEntries.Add("", "");
+    //option.Cors.CorsPolicyName = "ICorsPolicyService";
+})
     .AddInMemoryApiScopes(Config.ApiScopes)
     .AddInMemoryClients(Config.Clients)
     .AddInMemoryIdentityResources(Config.IdentityResources)

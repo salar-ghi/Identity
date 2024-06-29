@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientConsoleApp", "ClientC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InteractiveIdentityClient", "InteractiveIdentityClient\InteractiveIdentityClient.csproj", "{7FFE0E81-A14A-4FC5-AF09-E4E6498BE03B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiProject", "ApiProject\ApiProject.csproj", "{2B166F3B-22F7-4DC1-9A3B-88089B122515}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{7FFE0E81-A14A-4FC5-AF09-E4E6498BE03B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FFE0E81-A14A-4FC5-AF09-E4E6498BE03B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FFE0E81-A14A-4FC5-AF09-E4E6498BE03B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B166F3B-22F7-4DC1-9A3B-88089B122515}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B166F3B-22F7-4DC1-9A3B-88089B122515}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B166F3B-22F7-4DC1-9A3B-88089B122515}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B166F3B-22F7-4DC1-9A3B-88089B122515}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
