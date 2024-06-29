@@ -21,12 +21,13 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
 
 builder.Services.AddIdentityServer(option =>
 {
-    option.Events.RaiseErrorEvents = true;
-    option.Events.RaiseInformationEvents = true;
-    option.Events.RaiseFailureEvents = true;
-    option.Events.RaiseSuccessEvents = true;
-    
-    option.EmitStaticAudienceClaim = true;
+    //option.Events.RaiseErrorEvents = true;
+    //option.Events.RaiseInformationEvents = true;
+    //option.Events.RaiseFailureEvents = true;
+    //option.Events.RaiseSuccessEvents = true;    
+    //option.EmitStaticAudienceClaim = true;
+
+
     //option.AccessTokenJwtType = "at+jwt";
     //option.IssuerUri = "";
     //option.LogoutTokenJwtType = "logout+jwt";

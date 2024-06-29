@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "G:\\train\\.Net\\project\\Identity\\ApiProject\\ApiProject.csproj": {}
+    "C:\\Users\\s.ghahremani\\source\\repos\\Identity\\ApiProject\\ApiProject.csproj": {}
   },
   "projects": {
-    "G:\\train\\.Net\\project\\Identity\\ApiProject\\ApiProject.csproj": {
+    "C:\\Users\\s.ghahremani\\source\\repos\\Identity\\ApiProject\\ApiProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\train\\.Net\\project\\Identity\\ApiProject\\ApiProject.csproj",
+        "projectUniqueName": "C:\\Users\\s.ghahremani\\source\\repos\\Identity\\ApiProject\\ApiProject.csproj",
         "projectName": "ApiProject",
-        "projectPath": "G:\\train\\.Net\\project\\Identity\\ApiProject\\ApiProject.csproj",
-        "packagesPath": "C:\\Users\\sAlAr\\.nuget\\packages\\",
-        "outputPath": "G:\\train\\.Net\\project\\Identity\\ApiProject\\obj\\",
+        "projectPath": "C:\\Users\\s.ghahremani\\source\\repos\\Identity\\ApiProject\\ApiProject.csproj",
+        "packagesPath": "C:\\Users\\s.ghahremani\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\s.ghahremani\\source\\repos\\Identity\\ApiProject\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\sAlAr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\s.ghahremani\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -25,7 +25,6 @@
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -52,11 +51,11 @@
           "dependencies": {
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
-              "version": "[8.0.5, )"
+              "version": "[8.0.6, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.4.0, )"
+              "version": "[6.6.2, )"
             }
           },
           "imports": [
@@ -78,7 +77,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
