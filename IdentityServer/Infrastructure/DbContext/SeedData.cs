@@ -27,7 +27,7 @@ public class SeedData
                     LastName = "Smith",
                     UserName = "alice",
                     Email = "AliceSmith@email.com",
-                    EmailConfirmed = true,
+                    EmailConfirmed = true
                 };
                 var result = userMgr.CreateAsync(alice, "Pass123$").Result;
                 if (!result.Succeeded)

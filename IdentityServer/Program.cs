@@ -8,10 +8,9 @@ using Microsoft.IdentityModel.Tokens;
 using Duende.IdentityServer.EntityFramework.DbContexts;
 using Duende.IdentityServer.EntityFramework.Mappers;
 using Microsoft.IdentityModel.Logging;
-
-using Duende.IdentityServer;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+using Duende.IdentityServer.Test;
+using Duende.IdentityServer.Models;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,24 +27,25 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
 
 builder.Services.AddIdentityServer(option =>
 {
+    //option.LicenseKey = "license key here";
     option.Events.RaiseErrorEvents = true;
     option.Events.RaiseInformationEvents = true;
     option.Events.RaiseFailureEvents = true;
     option.Events.RaiseSuccessEvents = true;
 
-    //option.EmitStaticAudienceClaim = true;
+    option.EmitStaticAudienceClaim = true;
 
-
+    option.KeyManagement.Enabled = false;
     //option.AccessTokenJwtType = "at+jwt";
     //option.IssuerUri = "";
     //option.LogoutTokenJwtType = "logout+jwt";
     //option.Discovery.CustomEntries.Add("", "");
     //option.Cors.CorsPolicyName = "ICorsPolicyService";
-})
-    //.AddApiAuthorization<ApplicationUser, ApplicationDbContext>()
-    .AddInMemoryIdentityResources(Config.IdentityResources)
-    .AddInMemoryApiScopes(Config.ApiScopes)
+}).AddTestUsers(TestUsers.Users)
     .AddInMemoryClients(Config.Clients)
+    .AddInMemoryApiResources(Config.ApiResources)
+    .AddInMemoryApiScopes(Config.ApiScopes)
+    .AddInMemoryIdentityResources(Config.IdentityResources)
     .AddAspNetIdentity<ApplicationUser>()
     .AddConfigurationStore(options =>
     {
@@ -59,7 +59,7 @@ builder.Services.AddIdentityServer(option =>
         //options.ConfigureDbContext = b => b.UseSqlServer(connectionString);
         options.ConfigureDbContext = b => b.UseSqlServer(connectionString,
             sql => sql.MigrationsAssembly(typeof(Program).Assembly.GetName().Name));
-    })    
+    })
     .AddDeveloperSigningCredential(); // Not recommended for production
 
 //builder.Services.AddAuthentication()

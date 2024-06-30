@@ -121,6 +121,7 @@ C:\Users\s.ghahremani\source\repos\Identity\IdentityServer\bin\Debug\net8.0\Micr
 C:\Users\s.ghahremani\source\repos\Identity\IdentityServer\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
 C:\Users\s.ghahremani\source\repos\Identity\IdentityServer\bin\Debug\net8.0\Microsoft.Identity.Client.dll
 C:\Users\s.ghahremani\source\repos\Identity\IdentityServer\bin\Debug\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\s.ghahremani\source\repos\Identity\IdentityServer\bin\Debug\net8.0\microsoft.identitymodel.dll
 C:\Users\s.ghahremani\source\repos\Identity\IdentityServer\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
 C:\Users\s.ghahremani\source\repos\Identity\IdentityServer\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
 C:\Users\s.ghahremani\source\repos\Identity\IdentityServer\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll

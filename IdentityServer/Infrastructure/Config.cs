@@ -20,29 +20,33 @@ public class Config
         //_openid
         new IdentityResources.OpenId(),
         new IdentityResources.Profile(),
+        new IdentityResource
+        {
+            Name = "roles",
+            UserClaims = new List<string>{ "role"}
+        }
     };
 
     public static IEnumerable<ApiScope> ApiScopes =>
     //new ApiScope[]
     new List<ApiScope>
     {
-        new ApiScope(name:"read", displayName:"Read Your Data."),
-        new ApiScope(name:"write", displayName:"write Your Data."),
+        new ApiScope(name:"weatherapi.read", displayName:"Read Your Data."),
+        new ApiScope(name:"weatherapi.write", displayName:"write Your Data."),
         new ApiScope("api1", "My API"),
         new ApiScope("scope1", new[]{ "acr" }),
         new ApiScope("scope2", new[]{ "acr" }),
     };
-    public static IEnumerable<ApiResource> ApiResources()
+    public static IEnumerable<ApiResource> ApiResources => new[]
     {
-        return new List<ApiResource>
+        new ApiResource("weatherapi")
         {
-            new ApiResource("customer", "Customer API")
-            {
-                Scopes = { "customer.read", "customer.contact", "manage", "enumerate" },
-                AllowedAccessTokenSigningAlgorithms = { SecurityAlgorithms.RsaSsaPssSha256 }
-            }
-        };
-    }
+            Scopes =new List<string> { "weatherapi.read", "weatherapi.write" },
+            ApiSecrets = new List<Secret> {new Secret("ScopeSecret".Sha256())},
+            UserClaims = new List<string> {"role"}
+            //AllowedAccessTokenSigningAlgorithms = { SecurityAlgorithms.RsaSsaPssSha256 }
+        }
+    };
 
     public static IEnumerable<Client> Clients =>
     new Client[]
@@ -77,6 +81,18 @@ public class Config
             //RefreshTokenUsage = TokenUsage.ReUse,
             //RefreshTokenExpiration = TokenExpiration.Sliding,
             //SlidingRefreshTokenLifetime = 86400 // 1 day
+        },
+        new Client
+        {
+            ClientId = "webApi",
+            ClientName = "WebApi client",
+            AllowedGrantTypes = GrantTypes.Code,
+            RequireClientSecret = false,
+            RequirePkce = true,
+            RedirectUris = {"http://localhost:5005/callback"},
+            PostLogoutRedirectUris = {"http://localhost:5005/"},
+            AllowedCorsOrigins = {"http://localhost:5005"},
+            AllowedScopes = {"openid", "profile", "api1", "roles"}
         },
         //new Client
         //{
