@@ -1,20 +1,17 @@
 using Duende.IdentityServer;
+
 using IdentityServer.Domain;
 using IdentityServer.Infrastructure;
-using IdentityServer.Infrastructure.DbContext;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Duende.IdentityServer.EntityFramework.DbContexts;
-using Duende.IdentityServer.EntityFramework.Mappers;
 using Microsoft.IdentityModel.Logging;
-using Duende.IdentityServer.Test;
-using Duende.IdentityServer.Models;
-using Microsoft.Extensions.DependencyInjection;
+using IdentityServer.Infrastructure.DbContext;
+using Duende.IdentityServer.EntityFramework.DbContexts;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
 builder.Services.AddControllers();
 
 var connectionString = builder.Configuration.GetConnectionString("IdentityServerCon");
@@ -27,7 +24,6 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
 
 builder.Services.AddIdentityServer(option =>
 {
-    //option.LicenseKey = "license key here";
     option.Events.RaiseErrorEvents = true;
     option.Events.RaiseInformationEvents = true;
     option.Events.RaiseFailureEvents = true;
@@ -36,11 +32,6 @@ builder.Services.AddIdentityServer(option =>
     option.EmitStaticAudienceClaim = true;
 
     option.KeyManagement.Enabled = false;
-    //option.AccessTokenJwtType = "at+jwt";
-    //option.IssuerUri = "";
-    //option.LogoutTokenJwtType = "logout+jwt";
-    //option.Discovery.CustomEntries.Add("", "");
-    //option.Cors.CorsPolicyName = "ICorsPolicyService";
 }).AddTestUsers(TestUsers.Users)
     .AddInMemoryClients(Config.Clients)
     .AddInMemoryApiResources(Config.ApiResources)
@@ -49,14 +40,11 @@ builder.Services.AddIdentityServer(option =>
     .AddAspNetIdentity<ApplicationUser>()
     .AddConfigurationStore(options =>
     {
-        //options.ConfigureDbContext = b => b.UseSqlServer(connectionString);
-
         options.ConfigureDbContext = b => b.UseSqlServer(connectionString,
             sql => sql.MigrationsAssembly(typeof(Program).Assembly.GetName().Name));
     })
     .AddOperationalStore(options =>
     {
-        //options.ConfigureDbContext = b => b.UseSqlServer(connectionString);
         options.ConfigureDbContext = b => b.UseSqlServer(connectionString,
             sql => sql.MigrationsAssembly(typeof(Program).Assembly.GetName().Name));
     })

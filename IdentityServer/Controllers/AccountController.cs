@@ -1,4 +1,6 @@
-﻿using Duende.IdentityServer;
+﻿using Azure.Core;
+using Duende.AccessTokenManagement.OpenIdConnect;
+using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Stores;
@@ -22,10 +24,9 @@ public class AccountController : ControllerBase
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly IIdentityServerInteractionService _interaction;
-    private readonly IClientStore _clientStore;
+    private readonly IClientStore _clientStore;    
     private readonly ITokenService _tokenService;
     private readonly IConfiguration _config;
-    //private readonly ILogger<AccountController> _logger;
 
 
     public AccountController(
@@ -92,7 +93,8 @@ public class AccountController : ControllerBase
             if (result.Succeeded)
             {
                 var user = await _userManager.FindByNameAsync(model.Username);
-                return Ok(new { access_token = await GenerateAccessToken(user) });
+                var accToken = await GenerateAccessToken(user);
+                return Ok(new { access_token = accToken });
             }
             else if (result.IsLockedOut)
             {
@@ -111,7 +113,7 @@ public class AccountController : ControllerBase
     }
 
 
-    private async Task<Token> GenerateAccessToken(ApplicationUser user)
+    private async Task<string> GenerateAccessToken(ApplicationUser user)
     {
         var claims = new List<Claim>
         {
@@ -120,8 +122,13 @@ public class AccountController : ControllerBase
             new Claim(JwtClaimTypes.Email, user.Email ?? ""),
             new Claim("role", "admin")
         };
+        //var email = context.Subject.FindFirst(JwtClaimTypes.Email)?.Value ?? "default@example.com";
 
-        var principal = new ClaimsPrincipal(new ClaimsIdentity(claims, "Bearer"));
+
+        var identity = new ClaimsIdentity(claims, "Bearer");
+        var principal = new ClaimsPrincipal(identity);
+
+        //var principal = new ClaimsPrincipal(new ClaimsIdentity(claims, "Bearer"));
         Console.WriteLine($"IsAuthenticated: {principal.Identity?.IsAuthenticated}");
 
 
@@ -163,9 +170,13 @@ public class AccountController : ControllerBase
             }
         };
         CheckNullValues(tokenRequest);
-        var accessToken = await _tokenService.CreateAccessTokenAsync(tokenRequest);
-        Console.WriteLine($"accessToken : => {accessToken}");
-        return accessToken;
+        //var accessToken = await _tokenService.CreateAccessTokenAsync(tokenRequest);
+        //var accessToken = await _accessToken.GetAccessTokenAsync(principal);
+        var tokenResult = await _tokenService.CreateAccessTokenAsync(tokenRequest);
+        var tknResult = tokenRequest.AccessTokenToHash;
+        //var accessToken = await _tokenService.CreateTokenAsync(tokenRequest);
+        Console.WriteLine($"accessToken : => {tokenResult}");
+        return tknResult;
     }
 
     //[HttpPost(Name="Login")]
@@ -189,7 +200,7 @@ public class AccountController : ControllerBase
             //    return BadRequest(new { message = "Account is locked out" });
             //}
 
-            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, lockoutOnFailure: false);
+            var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, lockoutOnFailure: false);
             //var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, false);
             if (result.Succeeded)
             {
@@ -226,12 +237,12 @@ public class AccountController : ControllerBase
                 //    expiration = jwtToken.ValidTo
                 //});
 
-                //var identity = new ClaimsIdentity(claims, "local");
-                //var principal = new ClaimsPrincipal(identity);
+                var identity = new ClaimsIdentity(claims, "local");
+                var principal = new ClaimsPrincipal(identity);
 
-                var principal = await _signInManager.CreateUserPrincipalAsync(user);
-                if (VerifyUserClaims(principal))
-                {
+                //var principal = await _signInManager.CreateUserPrincipalAsync(user);
+                //if (VerifyUserClaims(principal))
+                //{
                     // Create a token request
                     var tokenRequest = new TokenCreationRequest
                     {
@@ -240,7 +251,8 @@ public class AccountController : ControllerBase
                         ValidatedRequest = new ValidatedRequest()
                     };
 
-                    // Generate the Token
+                    // Generate the Token 
+                    //var accessToken = await _accessToken.GetAccessTokenAsync(principal);
                     var token = await _tokenService.CreateAccessTokenAsync(tokenRequest);
                     if (token == null)
                     {
@@ -252,7 +264,7 @@ public class AccountController : ControllerBase
                         token_type = "Bearer",
                         expires_in = token.Lifetime
                     });
-                }
+                //}
 
                 // Create a security token
                 //var tokenResult = await _tokenService.CreateSecurityTokenAsync(tokenRequest);

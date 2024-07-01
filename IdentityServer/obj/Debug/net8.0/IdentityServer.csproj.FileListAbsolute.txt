@@ -91,6 +91,8 @@ C:\Users\s.ghahremani\source\repos\Identity\IdentityServer\bin\Debug\net8.0\Iden
 C:\Users\s.ghahremani\source\repos\Identity\IdentityServer\bin\Debug\net8.0\IdentityServer.pdb
 C:\Users\s.ghahremani\source\repos\Identity\IdentityServer\bin\Debug\net8.0\Azure.Core.dll
 C:\Users\s.ghahremani\source\repos\Identity\IdentityServer\bin\Debug\net8.0\Azure.Identity.dll
+C:\Users\s.ghahremani\source\repos\Identity\IdentityServer\bin\Debug\net8.0\Duende.AccessTokenManagement.dll
+C:\Users\s.ghahremani\source\repos\Identity\IdentityServer\bin\Debug\net8.0\Duende.AccessTokenManagement.OpenIdConnect.dll
 C:\Users\s.ghahremani\source\repos\Identity\IdentityServer\bin\Debug\net8.0\Duende.IdentityServer.dll
 C:\Users\s.ghahremani\source\repos\Identity\IdentityServer\bin\Debug\net8.0\Duende.IdentityServer.AspNetIdentity.dll
 C:\Users\s.ghahremani\source\repos\Identity\IdentityServer\bin\Debug\net8.0\Duende.IdentityServer.EntityFramework.dll
@@ -121,7 +123,6 @@ C:\Users\s.ghahremani\source\repos\Identity\IdentityServer\bin\Debug\net8.0\Micr
 C:\Users\s.ghahremani\source\repos\Identity\IdentityServer\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
 C:\Users\s.ghahremani\source\repos\Identity\IdentityServer\bin\Debug\net8.0\Microsoft.Identity.Client.dll
 C:\Users\s.ghahremani\source\repos\Identity\IdentityServer\bin\Debug\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll
-C:\Users\s.ghahremani\source\repos\Identity\IdentityServer\bin\Debug\net8.0\microsoft.identitymodel.dll
 C:\Users\s.ghahremani\source\repos\Identity\IdentityServer\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
 C:\Users\s.ghahremani\source\repos\Identity\IdentityServer\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
 C:\Users\s.ghahremani\source\repos\Identity\IdentityServer\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
